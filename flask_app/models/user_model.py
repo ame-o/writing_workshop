@@ -49,7 +49,6 @@ class User:
             is_valid = False
         print(form_data)
         return is_valid
-
 # =========================================================
         #Class Methods
 # =========================================================
@@ -86,10 +85,8 @@ class User:
 # =========================================================
     @classmethod
     def edit_instance(cls,data):
-        query = "UPDATE users SET username=%(username)s, updated_at=NOW() WHERE id = %(id)s;"
+        query = "UPDATE users SET first_name=%(first_name)s, username=%(username)s, password=%(password)s  WHERE id = %(id)s;"
         results= connectToMySQL("writing_workshop").query_db(query,data)
-        if len(results) < 1:
-            return False
         return results
 
 
@@ -97,7 +94,7 @@ class User:
     #join all to all
 # =========================================================
 @classmethod
-def user_bands(cls,data):
+def user_vocab(cls,data):
     query = """SELECT * FROM users 
     JOIN vocabulary ON users.id= vocabulary.user_id
     WHERE users.id = %(id)s;"""

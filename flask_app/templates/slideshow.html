@@ -46,17 +46,15 @@
       <div class="whole-page flex">
 
         <div class="r-1 flex">
-          <label for="date">Today's Date:</label>
-          <input type="text" name="date" id="currentDate">
+          <h2>All Lessons</h2>
         </div>
         <br>
         <div class="row">
-          <h2>All Lessons</h2>
           <br><br>
           <p>Week 1 Day 1:</p>
           <div class="slideshow-container">
             <div class="mySlides1">
-              <img src="{{ url_for('static',filename ='img/1.1.png') }}" alt="Week_1">
+              <img src="{{ url_for('static',filename ='img/1.1.png') }}" alt="Week_1" style="width:100%">
             </div>
             <div class="mySlides1">
               <img src="{{ url_for('static',filename ='img/1.2.png') }}" alt="Week_1">
@@ -86,22 +84,61 @@
         <p>Week 1 Day 2:</p>
         <div class="slideshow-container">
           <div class="mySlides2">
-            <img src="{{ url_for('static',filename ='img/1.9.png') }}" alt="Week_1">
+            <img src="{{ url_for('static',filename ='img/1.9.png') }}" alt="Week_1_Day2" style ="width:100%">
           </div>
           <br>
           <div class="row">
             <div class="mySlides2">
+              <img src="{{ url_for('static',filename ='img/1.10.png') }}" alt="Week_1_Day2">
+            </div>
+          </div>
+          <div class="row">
+            <div class="mySlides2">
+              <img src="{{ url_for('static',filename ='img/1.11.png') }}" alt="Week_1_Day2" style="width:100%">
             </div>
           </div>
 
-          <div class="mySlides2">
-            <img src="img_band_ny.jpg" style="width:100%">
+          <div class="row">
+            <div class="mySlides2">
+              <img src="{{ url_for('static',filename ='img/1.12.png') }}" alt="Week_1_Day2" style="width:100%">
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="mySlides2">
+              <img src="{{ url_for('static',filename ='img/1.13.png') }}" alt="Week_1_Day2" style="width:100%">
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="mySlides2">
+              <img src="{{ url_for('static',filename ='img/1.14.png') }}" alt="Week_1_Day2" style="width:100%">
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="mySlides2">
+              <img src="{{ url_for('static',filename ='img/1.15.png') }}" alt="Week_1_Day2" style="width:100%">
+            </div>
           </div>
 
           <a class="prev" onclick="plusSlides(-1, 1)">&#10094;</a>
           <a class="next" onclick="plusSlides(1, 1)">&#10095;</a>
         </div>
+        <div class="slideshow-container">
+          <div class="mySlides3">
+            <img src="{{ url_for('static',filename ='img/c.1.png') }}" alt="cinderella" style="width:100%">
+          </div>
+          
+          <div class="row">
+            <div class="mySlides3">
+              <img src="{{ url_for('static',filename ='img/c.2.png') }}" alt="cinderella" style="width:100%">
+            </div>
+          </div>
+          <a class="prev" onclick="plusSlides(-1, 1)">&#10094;</a>
+          <a class="next" onclick="plusSlides(1, 1)">&#10095;</a>
 
+        </div>
         <script type="text/javascript" src="{{ url_for('static', filename='js/slideshow.js') }}"></script>
 
 

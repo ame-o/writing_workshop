@@ -65,8 +65,7 @@ main{
   box-shadow: #558ABB 3px 5px;
   border-radius: 5%;
 }
-.l-1 h1, p{
-}
+
 .l-top,.r-1,.r-2{
   padding: 20px;
   background-color:rgb(238, 218, 255);
@@ -77,6 +76,9 @@ main{
 
 * {box-sizing: border-box}
 .mySlides1, .mySlides2 {display: none}
+img {vertical-align: middle;}
+
+.mySlides3, .mySlides4 {display: none}
 img {vertical-align: middle;}
 
 /* Slideshow container */

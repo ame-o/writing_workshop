@@ -4,20 +4,13 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Add New Vocab</title>
+    <title>Edit Profile</title>
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}">
 
 </head>
 
 <body>
     <div class="whole-page flex">
-        {% with messages = get_flashed_messages() %}
-        {% if messages %}
-        {% for message in messages %}
-        <p>{{message}}</p>
-        {% endfor %}
-        {% endif %}
-        {% endwith %}
         <nav class="nav flex">
             <div class="navbar flex">
                 <h2 class="title">
@@ -60,6 +53,13 @@
                         <h2 class="title">
                             Edit Your Information
                         </h2>
+                        {% with messages = get_flashed_messages() %}
+                        {% if messages %}
+                        {% for message in messages %}
+                        <p>{{message}}</p>
+                        {% endfor %}
+                        {% endif %}
+                        {% endwith %}
                         <form action="/user/edit/process" method="post">
                             <input type="hidden" name="id" value="{{logged_in.id}}">
                             <div>
@@ -68,17 +68,17 @@
                             </div>
                             <div>
                                 <label for="username"> Change your username: </label>
-                                <input type="text" name="username" value="logged_in.username">
+                                <input type="text" name="username" value="{{logged_in.username}}">
                             </div>
                             <div>
                                 <label for="password">Change your password: </label>
-                                <input type="text" name="password" value="logged_in.username">
+                                <input type="text" name="password">
                             </div>
                             <div>
                                 <label for="con_password">Confirm your new password: </label>
                                 <input type="text" name="con_password">
                             </div>
-                                <input class="btn" type="submit" value="Create">
+                                <input class="btn" type="submit" value="Update">
                             </div>
                         </form>
                     </div>

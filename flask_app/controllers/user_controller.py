@@ -94,7 +94,7 @@ def dashboard():
 # =========================================================
 
 @app.route('/user/edit/<int:user_id>')
-def form_edit_user(id):
+def form_edit_user(user_id):
     if "user_id" not in session:
         return redirect('/lost')
     user_id = session["user_id"]
@@ -107,15 +107,16 @@ def form_edit_user(id):
 #==============================================================
 @app.route('/user/edit/process', methods = ['POST'])
 def process_edit_user():
-    if not User.validate_login(request.form):
-        return redirect("/user/edit")
+    if not User.validate_register(request.form):
+        user_id = int(request.form['id'])
+        return redirect(f"/user/edit/{user_id}")
+    pw_hash = bcrypt.generate_password_hash(request.form['password'])
     data = {
         "id": session["user_id"],
         "first_name": request.form["first_name"],
-        "last_name": request.form["last_name"],
-        "username": request.form["username"]
+        "username": request.form["username"],
+        "password": pw_hash
     }
-    print(data)
     User.edit_instance(data)
     return redirect ("/dashboard")
 
