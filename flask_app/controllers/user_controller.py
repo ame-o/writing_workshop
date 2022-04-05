@@ -142,3 +142,9 @@ def delete(id):
     User.delete_instance(query_data)
     return redirect('/dashboard')
 
+#====================================================
+# ==============================LOST?
+# ===================================================
+@app.route('/lost')
+def lost():
+    return render_template("lost.html")
