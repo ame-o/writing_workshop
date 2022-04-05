@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Dashboard</title>
+  <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}">
+
+</head>
+
+<body>
+  <div class="whole-page flex">
+    <nav class="nav flex">
+      <div class="navbar flex">
+        <h2 class="title">
+          Hello {{logged_in.first_name}} 💜
+        </h2>
+      </div>
+      <div class="navbar flex">
+        <a href="/user/edit/{{logged_in.id}}">
+          ♡Edit Profile
+        </a>
+      </div>
+      {% if logged_in.id ==1 %}
+      <div class="navbar flex">
+        <a href="/new/weekly">
+          ♡New Assignments
+        </a>
+      </div>
+      <div class="navbar flex">
+        <a href="/new/vocab">
+          ♡New Vocabulary Words
+        </a>
+      </div>
+      {% endif %}
+      <div class="navbar flex">
+        <div class="buttons">
+          <a href="/logout">
+            ♡Log Out
+          </a>
+        </div>
+      </div>
+    </nav>
+    <br>
+    <!-- the real stuff below -->
+    <main>
+      <!-- main body -->
+      <div class="columns flex">
+        <div class="blank"> </div>
+        <div class="leftcol flex">
+          <div class="l-top">
+            <h2 class="title">
+              Homework Due This Week 
+            </h2>
+          </div>
+          <br>
+          <div class="l-1">
+            <div class="list">
+              <h2>Vocabulary Words</h2>
+              <ul>
+                {% for vocab in all_vocab %}
+                <li>{{vocab.spelling}}</li>
+                <li><a href="/view/vocab/{{vocab.id}}">♡ View </a>
+                  {% if logged_in.id ==1 or logged_in.id ==2 %}
+                  <a href="/edit/vocab/{{vocab.id}}">♡ Edit </a>
+                  <a href="/delete/vocab/{{vocab.id}}">♡ Delete </a>
+                  {% endif %}
+                </li>
+              </ul>
+              {% endfor %}
+              <ul>
+                ~
+                <li>
+                  <input type="checkbox" id="vocab_done" name="vocab">
+                  Spell,define, and write one sentence for each word.
+                </li>
+                ~
+                {% if weekly.vocab_story != "n/a" %}
+                <li>
+                  <input type="checkbox" id="vocab_story" name="vocab_story">
+                  {{weekly.vocab_story}}
+                </li>
+                {% endif %}
+              </ul>
+              
+            </div>
+          </div>
+          <br>
+          <div class="essay l-1">
+            <h2>Essay Topics</h2>
+            {% if logged_in.id ==1 %}
+            <a href="/new/weekly">♡ Add Weekly Assignments</a>
+            <br>
+            <a href="/edit/weekly/{{weekly.id}}">♡ Edit Weekly Assignments</a>
+            <br>
+            {% endif %}
+            <input type="checkbox" name="hamburger_1">
+            <p>{{weekly.hamburger_1}}
+            </p>
+            ~
+            {% if weekly.hamburger_2 != "n/a"  %}
+            <p>
+              <input type="checkbox" name="hamburger_2">
+              {{weekly.hamburger_2}}
+            </p>
+            ~
+            {% endif %}
+            <p>
+              <input type="checkbox" name="essay_1">
+              {{weekly.essay_1}}
+            </p>
+            {% if weekly.essay_2 != "n/a"  %}
+            <p>
+              <input type="checkbox" name="essay_2">
+              {{weekly.essay_2}}
+            </p>
+            {% endif %}
+          </ul>
+        </div>
+      </div>
+      <div class="rightcol flex">
+        <div class="r-1">
+          <p>You are on:</p>
+          <h3>
+            (Week {{weekly.week_id}})
+          </h3>
+          <!-- <form action="/dateverify" method="post">
+            <input type="hidden" id="currentDate">
+            <label for="">View Past Weeks:</label>
+            <input type="submit" value="View Past Weeks">
+          </form> -->
+          {% if weekly.week_id < 1%}
+          <h4>View All Weeks</h4>
+          <a href="/view/week/1">Week 1</a>
+          {% endif %}
+        </div>
+          <br>
+        <div class="r-1">
+            <h3>View All Lessons:</h3>
+            <br>
+            <a href="/slideshow">♡ View All Lessons</a>
+          </div>
+          <br>
+          <div class="r-1">
+            <h3>
+              Links to Print Pages:
+            </h3>
+            <br>
+            <ul>
+              <li>
+                <a href="https://docs.google.com/document/d/10tG2aP8nRaLLV5zAXM6dN8GJq7E_1xT4jqiHXxWfV8U/edit?usp=sharing">♡ Hamburger Paragraph</a>
+              </li>
+              <li>
+                <a href="https://docs.google.com/document/d/131nQups1wn4l2jx-OZio83wYnb-ISnPZGeQ_OfjlD_8/edit?usp=sharing">♡ Typed Essay Format</a>
+              </li>
+              <li>
+                <a href="https://docs.google.com/document/d/124ZXcjrWFd1tLWXw9ORuZvKUbpEJrXUTooVmmFvBpTg/edit?usp=sharing">♡ Cinderella Project</a>
+              </li>
+              {% if weekly.week_id != 1  %}
+              <li>
+                <a href="https://docs.google.com/document/d/12ufuZW9KSBrwhP_E-T3vQHI2dfDm82CzACJ4J34uG80/edit?usp=sharing">♡ Still I Rise - <span style="font-style: italic;">- Maya Angelou</span></a>
+              </li>
+              {% endif %}
+            </ul>
+          </div>
+        </div>
+        <div class="blank"> </div>
+      </div>
+    </main>
+  </div>
+  </div>
+  <script type="text/javascript" src="{{ url_for('static', filename='js/day.js') }}"></script>
+</body>
+
+</html>

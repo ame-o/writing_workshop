@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <!DOCTYPE html>
+    <html lang="en">
+    
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/flashcards.css') }}">
+    
+        <title>View 1 Vocabulary Word</title>
+    </head>
+    
+    <body>
+        <div class="whole-page flex">
+            <nav class="nav flex">
+                <div class="navbar flex">
+                    <a href="/dashboard">
+                        ♡Home
+                    </a>
+                </div>
+                <div class="navbar flex">
+                    <div class="buttons">
+                        <a href="/logout">
+                            ♡Log Out
+                        </a>
+                    </div>
+                </div>
+            </nav>
+            <br>
+            <!-- the real stuff below -->
+            <main>
+                {% with messages = get_flashed_messages() %}
+                {% if messages %}
+                {% for message in messages %}
+                <p>{{message}}</p>
+                {% endfor %}
+                {% endif %}
+                {% endwith %}
+
+    <div class="r-1">
+        <h1>
+            Lost?
+        </h1>
+        <div>
+            <a href="/dashboard">♡Go Back Home♡</a>
+        </div>
+        <img src="{{ url_for('static',filename ='img/ghibli.jpg') }}" alt="Week_1">
+    </div>
+    </main>
+    </div>
+</body>
+</html>

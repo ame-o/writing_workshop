@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Add New Vocab</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}">
+
+</head>
+
+<body>
+    <div class="whole-page flex">
+        {% with messages = get_flashed_messages() %}
+        {% if messages %}
+        {% for message in messages %}
+        <p>{{message}}</p>
+        {% endfor %}
+        {% endif %}
+        {% endwith %}
+        <nav class="nav flex">
+            <div class="navbar flex">
+                <h2 class="title">
+                    Hello {{logged_in.first_name}} 💜
+                </h2>
+            </div>
+            <div class="navbar flex">
+                <a href="/dashboard">
+                    ♡Home
+                </a>
+            </div>
+            {% if logged_in.id ==1 %}
+            <div class="navbar flex">
+                <a href="/new/weekly">
+                    ♡New Assignments
+                </a>
+            </div>
+            <div class="navbar flex">
+                <a href="/new/vocab">
+                    ♡New Vocabulary Words
+                </a>
+            </div>
+            {% endif %}
+            <div class="navbar flex">
+                <div class="buttons">
+                    <a href="/logout">
+                        ♡Log Out
+                    </a>
+                </div>
+            </div>
+        </nav>
+        <br>
+        <!-- the real stuff below -->
+        <main>
+            <!-- main body -->
+            <div class="columns flex">
+                <div class="blank"> </div>
+                <div class="leftcol flex">
+                    <div class="l-1 flex">
+                        <h2 class="title">
+                            Add A New Vocabulary Word
+                        </h2>
+                        <form action="/new/vocab/process" method="post">
+                            <div>
+                                <label for="spelling">Vocabulary Word</label>
+                                <input type="text" name="spelling">
+                            </div>
+                            <div>
+                                <label for="definition">Definition</label>
+                                <input type="textarea" name="definition">
+                            </div>
+                            <div>
+                                <label for="sentence">Use it in a sentence:</label>
+                                <input type="textarea" name="sentence">
+                            </div>
+                            <div>
+                                <label for="due_date">Due Date</label>
+                                <input type="date" name="due_date">
+                            </div>
+                            <div>
+                                <label for="week id">Week #:</label>
+                                <input type="number" name="week_id">
+                            </div>
+                            <div>
+                                <input type="hidden" name="user_id" value="{{user_id}}">
+                                <input class="btn" type="submit" value="Create">
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <div class="blank"> </div>
+            </div>
+        </main>
+    </div>
+    </div>
+</body>
+
+</html>

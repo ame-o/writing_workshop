@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/flashcards.css') }}">
+
+    <title>View 1 Vocabulary Word</title>
+</head>
+
+<body>
+    <div class="whole-page flex">
+        <nav class="nav flex">
+            <div class="navbar flex">
+                <h2 class="title">
+                    Hello {{logged_in.first_name}} 💜
+                </h2>
+            </div>
+            <div class="navbar flex">
+                <a href="/dashboard">
+                    ♡Home
+                </a>
+            </div>
+            {% if logged_in.id ==1 or logged_in.id ==2 %}
+            <div class="navbar flex">
+                <a href="/new/weekly">
+                    ♡New Assignments
+                </a>
+            </div>
+            <div class="navbar flex">
+                <a href="/new/vocab">
+                    ♡New Vocabulary Words
+                </a>
+            </div>
+            {% endif %}
+            <div class="navbar flex">
+                <div class="buttons">
+                    <a href="/logout">
+                        ♡Log Out
+                    </a>
+                </div>
+            </div>
+        </nav>
+        <br>
+        <!-- the real stuff below -->
+        <main>
+            {% with messages = get_flashed_messages() %}
+            {% if messages %}
+            {% for message in messages %}
+            <p>{{message}}</p>
+            {% endfor %}
+            {% endif %}
+            {% endwith %}
+            <!-- main body -->
+            <div class="columns flex">
+                <div class="blank"> </div>
+                <div class="leftcol">
+                    <div class="l-1">
+                        Click on the card below to flip to the definition ↓
+
+                        <div class="scene scene--card">
+                            <div class="card">
+                                <div class="card__face card__face--front">
+                                    <h1 class="card__face card__face--front" id="spelling">{{one_vocab.spelling}}</h1>
+                                </div>
+                                <p class="card__face card__face--back">{{one_vocab.definition}}</p>
+                            </div>
+                        </div>
+                        <div>
+                            Click to hear the pronounciation below ↓
+                            <audio controls id="pronounciation">
+                                <source type="audio/mpeg" id="pronounciation">
+                            </audio>
+                            </div>
+                            (sometimes there is no sound)
+                            ¯ \ _ (ツ) _ / ¯
+                        </div>
+                    </div>
+                <div class="rightcol">
+                    <div class="r-1">
+                        <h3>Links for other Weeks:</h3>
+                        <ul>
+                            <li>
+                                
+                            </li>
+                        </ul>
+
+                    </div>
+                    <br>
+                    <div class="r-1">
+                        <h2>This Week's Vocabulary</h2>
+                        <ul>
+                            {% for vocab in all_vocab %}
+                            <li>{{vocab.spelling}}
+                                <a href="/view/vocab/{{vocab.id}}">♡ View </a>
+                            </li>
+                        </ul>
+                        {% endfor %}
+                        <ul>
+                    </div>
+                    <br>
+
+                </div>
+            </div>
+        </main>
+        <script type="text/javascript" src="{{ url_for('static', filename='js/script.js') }}"></script>
+    </div>
+</body>
+
+</html>

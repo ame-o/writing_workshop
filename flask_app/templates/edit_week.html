@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Edit Weekly</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}">
+
+</head>
+
+<body>
+    <div class="whole-page flex">
+        <nav class="nav flex">
+            <div class="navbar flex">
+                <h2 class="title">
+                    Hello {{logged_in.first_name}} 💜
+                </h2>
+            </div>
+            <div class="navbar flex">
+                <a href="/dashboard">
+                    ♡Home
+                </a>
+            </div>
+            {% if logged_in.id ==1 or logged_in.id ==2 %}
+            <div class="navbar flex">
+                <a href="/new/weekly">
+                    ♡New Assignments
+                </a>
+            </div>
+            <div class="navbar flex">
+                <a href="/new/vocab">
+                    ♡New Vocabulary Words
+                </a>
+            </div>
+            {% endif %}
+            <div class="navbar flex">
+                <div class="buttons">
+                    <a href="/logout">
+                        ♡Log Out
+                    </a>
+                </div>
+            </div>
+        </nav>
+        <br>
+        <!-- the real stuff below -->
+        <main>
+            <!-- main body -->
+            <div class="columns flex">
+                {% with messages = get_flashed_messages() %}
+                {% if messages %}
+                {% for message in messages %}
+                <p>{{message}}</p>
+                {% endfor %}
+                {% endif %}
+                {% endwith %}
+                <div class="blank"> </div>
+                <div class="leftcol flex">
+                    <div class="l-1 flex">
+                        <h2 class="title">
+                            Edit Week {{one_week_id}}
+                        </h2>
+                        {% if logged_in.id ==1 or logged_in.id ==2 %}
+                        <form action="/edit/weekly/process" method="post">
+                            <div>
+                                <input type="hidden" name="vocab" value="{{one_week.vocab}}">
+                                <label for="vocab_story">Story prompt for 5 Vocabulary Words:</label>
+                                <input type="text" name="vocab_story" value="{{one_vocab_story}}">
+                            </div>
+                            <div>
+                                <label for="hamburger_1">Hamburger 1: </label>
+                                <input type="text" name="hamburger_1" value="{{one_week.hamburger_1}}">
+                            </div>
+                            <div>
+                                <label for="hamburger_2">Hamburger 2:</label>
+                                <input type="textarea" name="hamburger_2" value="{{one_week.hamburger_2}}">
+                            </div>
+                            <div>
+                                <label for="essay_1">Essay 1:</label>
+                                <input type="textarea" name="essay_1" value="{{one_week.essay_1}}">
+                            </div>
+                            <div>
+                                <label for="essay_2">Essay 2:</label>
+                                <input type="textarea" name="essay_2" value="{{one_week.essay_2}}">
+                            </div>
+                            <div>
+                                <label for="week_id">Week #:</label>
+                                <input type="number" name="week_id" value="{{one_week.week_id}}">
+                            </div>
+                            <div>
+                                <input type="hidden" name="user_id" value="{{one_week.user_id}}">
+                                <p>(Please put n/a if not applicable.)</p>
+                                <input class="btn" type="submit" value="Update">
+                            </div>
+                        </form>
+                        <br>
+                        or...
+                        <div>
+                            <button class="btn" onclick="/delete/{{one_week.id}}">delete week
+                                {{one_week.week_id}}?</button>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+                <div class="blank"> </div>
+            </div>
+        </main>
+    </div>
+    </div>
+</body>
+</html>
